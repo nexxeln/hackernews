@@ -30,9 +30,11 @@ export default function Root() {
         <Suspense>
           <ErrorBoundary>
             <Navbar />
-            <Routes>
-              <FileRoutes />
-            </Routes>
+            <main class="flex flex-col items-center mx-4 md:mx-auto md:w-2/3">
+              <Routes>
+                <FileRoutes />
+              </Routes>
+            </main>
           </ErrorBoundary>
         </Suspense>
         <Scripts />

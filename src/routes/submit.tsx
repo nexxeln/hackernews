@@ -1,3 +1,3 @@
 export default function Submit() {
-  return <main>Submit</main>;
+  return <div>Submit</div>;
 }
