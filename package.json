@@ -1,5 +1,5 @@
 {
-  "name": "@example/basics",
+  "name": "@nexxel/hackernews",
   "type": "module",
   "version": "0.0.1",
   "private": true,
@@ -11,10 +11,15 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^1.6.10"
+    "@planetscale/database": "^1.4.0",
+    "@prisma/client": "^4.6.1",
+    "astro": "^1.6.10",
+    "kysely": "^0.22.0",
+    "kysely-planetscale": "^1.1.0"
   },
   "devDependencies": {
     "@unocss/reset": "^0.46.5",
+    "prisma": "^4.6.1",
     "unocss": "^0.46.5"
   }
 }
