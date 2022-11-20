@@ -1,3 +1,7 @@
+html {
+  color-scheme: dark;
+}
+
 body {
-  @apply bg-neutral-9 text-neutral-1 font-sans;
+  --at-apply: bg-neutral-9 text-neutral-1 font-sans;
 }
