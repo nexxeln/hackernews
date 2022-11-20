@@ -1,25 +1,33 @@
 {
-  "name": "@nexxel/hackernews",
-  "type": "module",
-  "version": "0.0.1",
-  "private": true,
+  "name": "temp",
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
+    "dev": "solid-start dev",
+    "build": "solid-start build",
+    "start": "solid-start start"
+  },
+  "type": "module",
+  "devDependencies": {
+    "@unocss/reset": "^0.46.5",
+    "prisma": "^4.6.1",
+    "solid-start-node": "^0.2.0",
+    "typescript": "^4.8.4",
+    "unocss": "^0.46.5",
+    "vite": "^3.1.8"
   },
   "dependencies": {
     "@planetscale/database": "^1.4.0",
     "@prisma/client": "^4.6.1",
-    "astro": "^1.6.10",
+    "@solidjs/meta": "^0.28.0",
+    "@solidjs/router": "^0.5.0",
+    "dotenv": "^16.0.3",
     "kysely": "^0.22.0",
-    "kysely-planetscale": "^1.1.0"
+    "kysely-planetscale": "^1.1.0",
+    "solid-js": "^1.6.0",
+    "solid-start": "^0.2.0",
+    "undici": "^5.11.0",
+    "zod": "^3.19.1"
   },
-  "devDependencies": {
-    "@unocss/reset": "^0.46.5",
-    "prisma": "^4.6.1",
-    "unocss": "^0.46.5"
+  "engines": {
+    "node": ">=16"
   }
 }
