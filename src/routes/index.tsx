@@ -6,6 +6,7 @@ import { prisma } from "~/core/db.server";
 import { Post } from "~/components/Post";
 
 export const routeData = () => {
+  // optimize this please
   return {
     posts: createServerData$(async () => {
       const latestGreatestPosts = await prisma.post.findMany({
