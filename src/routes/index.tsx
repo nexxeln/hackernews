@@ -1,11 +1,11 @@
-import { RouteDataArgs, useRouteData } from "solid-start";
+import { useRouteData } from "solid-start";
 import { createServerData$ } from "solid-start/server";
 import { For } from "solid-js";
 
 import { prisma } from "~/core/db.server";
 import { Post } from "~/components/Post";
 
-export const routeData = ({}: RouteDataArgs) => {
+export const routeData = () => {
   return {
     posts: createServerData$(async () => {
       const latestGreatestPosts = await prisma.post.findMany({
