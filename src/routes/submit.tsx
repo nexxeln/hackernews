@@ -75,9 +75,12 @@ export default function Submit() {
 
         <button
           type="submit"
+          disabled={submit.pending}
           class="w-fit text-left rounded-1 px-4 py-2 bg-neutral-8 hover:bg-neutral-7 transition border-(1 zinc-700) focus:(outline-none ring ring-zinc-600)"
         >
-          {submit.pending ? "Submitting..." : "Submit"}
+          <Show when={submit.pending} fallback={"Submit"}>
+            Submitting
+          </Show>
         </button>
       </Form>
     </div>
