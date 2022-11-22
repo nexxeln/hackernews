@@ -1,7 +1,35 @@
-import { type ParentComponent } from "solid-js";
+import { For, Match, Show, Switch, type ParentComponent } from "solid-js";
+import { PostCard } from "~/components/Post";
+import { trpc } from "~/utils/trpc";
 
 const Home: ParentComponent = () => {
-  return <></>;
+  const posts = trpc.posts.getTrending.useQuery();
+
+  return (
+    <>
+      <Switch>
+        <Match when={posts.isLoading}>
+          <p>Loading...</p>
+        </Match>
+
+        <Match when={posts.isSuccess}>
+          <div class="flex flex-col gap-8">
+            <For each={posts.data}>
+              {({ id, title, link, upvotes, createdAt }) => (
+                <PostCard
+                  id={id}
+                  title={title}
+                  link={link}
+                  upvotes={upvotes}
+                  createdAt={createdAt.toString()}
+                />
+              )}
+            </For>
+          </div>
+        </Match>
+      </Switch>
+    </>
+  );
 };
 
 export default Home;

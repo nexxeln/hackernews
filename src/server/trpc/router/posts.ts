@@ -1,18 +1,6 @@
-import { z } from "zod";
 import { t } from "../utils";
 
 export const postsRouter = t.router({
-  // create: t.procedure
-  //   .input(z.object({ text: z.string() }))
-  //   .mutation(async ({ input, ctx }) => {
-  //     return await ctx.prisma.notes.create({ data: input });
-  //   }),
-  // get: t.procedure
-  //   .input(z.object({ id: z.string() }))
-  //   .query(async ({ input, ctx }) => {
-  //     return await ctx.prisma.notes.findUnique({ where: { id: input.id } });
-  //   }),
-
   getTrending: t.procedure.query(async ({ ctx }) => {
     const latestGreatestPosts = await ctx.prisma.post.findMany({
       where: {

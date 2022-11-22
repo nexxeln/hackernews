@@ -8,7 +8,7 @@ export const PostCard: Component<{
   title: string;
   link: string;
   upvotes: number;
-  createdAt: Date;
+  createdAt: string;
 }> = (props) => {
   return (
     <article class="flex flex-col gap-2">
@@ -43,7 +43,7 @@ export const PostCard: Component<{
           </a>
 
           <div class="text-neutral-4 text-sm flex gap-2">
-            <span>{formatDistanceToNow(props.createdAt)} ago</span>
+            <span>{formatDistanceToNow(new Date(props.createdAt))} ago</span>
             <span>•</span>
             <A href={`/p/${props.id}`} class="hover:underline">
               View Comments
