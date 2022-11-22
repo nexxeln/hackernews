@@ -1,4 +1,4 @@
-import { For, Match, Show, Switch, type ParentComponent } from "solid-js";
+import { For, Match, Switch, type ParentComponent } from "solid-js";
 import { PostCard } from "~/components/Post";
 import { trpc } from "~/utils/trpc";
 
@@ -10,6 +10,10 @@ const Home: ParentComponent = () => {
       <Switch>
         <Match when={posts.isLoading}>
           <p>Loading...</p>
+        </Match>
+
+        <Match when={posts.isError}>
+          <p class="text-red-4">Oh no! Something went wrong!</p>
         </Match>
 
         <Match when={posts.isSuccess}>
