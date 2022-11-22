@@ -1,5 +1,5 @@
 import type { ZodFormattedError } from "zod";
-import { clientScheme } from "./schema";
+import { clientSchema } from "./schema";
 
 export const formatErrors = (
   errors: ZodFormattedError<Map<string, string>, string>
@@ -11,7 +11,7 @@ export const formatErrors = (
     })
     .filter(Boolean);
 
-const env = clientScheme.safeParse(import.meta.env);
+const env = clientSchema.safeParse(import.meta.env);
 
 if (env.success === false) {
   console.error(

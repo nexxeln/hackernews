@@ -1,4 +1,4 @@
-import { serverScheme } from "./schema";
+import { serverSchema } from "./schema";
 import type { ZodFormattedError } from "zod";
 
 export const formatErrors = (
@@ -11,7 +11,7 @@ export const formatErrors = (
     })
     .filter(Boolean);
 
-const env = serverScheme.safeParse(process.env);
+const env = serverSchema.safeParse(process.env);
 
 if (env.success === false) {
   console.error(

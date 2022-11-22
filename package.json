@@ -38,6 +38,7 @@
     "solid-start": "^0.2.1",
     "solid-start-trpc": "^0.0.13",
     "solid-trpc": "0.0.11-rc.2",
+    "solidjs-auth": "^0.0.8",
     "undici": "5.11.0",
     "zod": "^3.19.1"
   },
