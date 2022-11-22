@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { formatDistanceToNow } from "date-fns";
 import type { Component } from "solid-js";
 import { A } from "solid-start";
-import { queryClient, trpc } from "~/utils/trpc";
+import { trpc } from "~/utils/trpc";
 
 export const PostCard: Component<{
   id: string;
