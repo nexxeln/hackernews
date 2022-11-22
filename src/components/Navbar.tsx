@@ -1,11 +1,10 @@
-import { A, useLocation } from "solid-start";
-import { Component } from "solid-js";
-import { clsx } from "clsx";
+import { A } from "solid-start";
+import type { Component } from "solid-js";
 
-const NavItem: Component<{ href: string; text: string }> = ({ href, text }) => {
+const NavItem: Component<{ href: string; text: string }> = (props) => {
   return (
-    <A href={href} class="font-medium hover:text-neutral-2 transition">
-      {text}
+    <A href={props.href} class="font-medium hover:text-neutral-2 transition">
+      {props.text}
     </A>
   );
 };

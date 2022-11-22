@@ -1,7 +1,6 @@
 // @refresh reload
 import { Suspense } from "solid-js";
 import {
-  A,
   Body,
   ErrorBoundary,
   FileRoutes,
@@ -12,17 +11,17 @@ import {
   Scripts,
   Title,
 } from "solid-start";
-import "@unocss/reset/tailwind.css";
 import "uno.css";
+import "@unocss/reset/tailwind.css";
 
+import { Navbar } from "~/components/Navbar";
 import "./root.css";
-import { Navbar } from "./components/Navbar";
 
 export default function Root() {
   return (
     <Html lang="en">
       <Head>
-        <Title>Hacker News</Title>
+        <Title>Create JD App</Title>
         <Meta charset="utf-8" />
         <Meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>

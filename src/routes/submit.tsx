@@ -1,7 +1,7 @@
 import { Show } from "solid-js";
 import { createServerAction$, redirect } from "solid-start/server";
 import { z } from "zod";
-import { prisma } from "~/core/db.server";
+import { prisma } from "~/server/db/client";
 
 const inputSchema = z.object({
   title: z.string().min(1).max(255),
