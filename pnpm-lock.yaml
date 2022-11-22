@@ -20,6 +20,7 @@ specifiers:
   solid-start: ^0.2.1
   solid-start-node: ^0.2.1
   solid-start-trpc: ^0.0.13
+  solid-start-vercel: ^0.2.5
   solid-trpc: 0.0.11-rc.2
   typescript: ^4.8.3
   undici: 5.11.0
@@ -52,6 +53,7 @@ devDependencies:
   eslint-plugin-solid: 0.8.0_hsf322ms6xhhd4b5ne6lb74y4a
   prisma: 4.6.1
   solid-start-node: 0.2.5_gddp3tfuzgzvcohsqy4v7ox32q
+  solid-start-vercel: 0.2.5_pwel2bd237mbr7ooh5pghdxziu
   typescript: 4.9.3
   unocss: 0.46.5_vite@3.2.4
   vite: 3.2.4
@@ -3939,6 +3941,21 @@ packages:
       solid-js: 1.6.2
       solid-start: 0.2.5_i2cnpwj3ojjdnkycik5yjsstli
     dev: false
+
+  /solid-start-vercel/0.2.5_pwel2bd237mbr7ooh5pghdxziu:
+    resolution: {integrity: sha512-jeLVkrf3Y41+CYq83kxF4NEf7n0KRcVplPU5BdmLbOJl8vIsgLW/WRqM7Kj/1WHs9P/OWIhiXSW1KIOK7GAHuQ==}
+    peerDependencies:
+      solid-start: '*'
+      vite: '*'
+    dependencies:
+      '@rollup/plugin-commonjs': 22.0.2_rollup@2.79.1
+      '@rollup/plugin-json': 4.1.0_rollup@2.79.1
+      '@rollup/plugin-node-resolve': 13.3.0_rollup@2.79.1
+      rollup: 2.79.1
+      solid-start: 0.2.5_i2cnpwj3ojjdnkycik5yjsstli
+      terser: 5.15.1
+      vite: 3.2.4
+    dev: true
 
   /solid-start/0.2.5_i2cnpwj3ojjdnkycik5yjsstli:
     resolution: {integrity: sha512-G1Iyb2ECulsCsewr12hueaCGvB+FQPylcYq9SvsCy8A2Lpyj5KcB9ic7pAKtEbByBAa318MqvBFEmL4eKS8mhw==}
