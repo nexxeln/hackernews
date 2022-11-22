@@ -1,32 +1,32 @@
 import { A } from "solid-start";
 import { Component, createSignal } from "solid-js";
-import { formatDistanceToNow } from "date-fns";
+import { formatDistanceToNow, formatRFC7231 } from "date-fns";
 import clsx from "clsx";
 import server$ from "solid-start/server";
 
 import { prisma } from "~/core/db.server";
 
-export const Post: Component<{
+const upvote = server$(async (id: string) => {
+  await prisma.post.update({
+    where: { id },
+    data: { upvotes: { increment: 1 } },
+  });
+});
+
+const downvote = server$(async (id: string) => {
+  await prisma.post.update({
+    where: { id },
+    data: { upvotes: { decrement: 1 } },
+  });
+});
+
+export const PostCard: Component<{
   id: string;
   title: string;
   link: string;
   upvotes: number;
   createdAt: Date;
 }> = ({ id, title, link, upvotes, createdAt }) => {
-  const upvote = server$(async (id: string) => {
-    await prisma.post.update({
-      where: { id },
-      data: { upvotes: { increment: 1 } },
-    });
-  });
-
-  const downvote = server$(async (id: string) => {
-    await prisma.post.update({
-      where: { id },
-      data: { upvotes: { decrement: 1 } },
-    });
-  });
-
   const [isUpvoted, setIsUpvoted] = createSignal(false);
 
   return (
@@ -81,6 +81,33 @@ export const Post: Component<{
               View Comments
             </A>
           </div>
+        </div>
+      </div>
+    </article>
+  );
+};
+
+export const Post: Component<{
+  id: string;
+  title: string;
+  description?: string;
+  link: string;
+  upvotes: number;
+  createdAt: Date;
+}> = ({ id, title, link, upvotes, createdAt }) => {
+  return (
+    <article class="flex flex-col gap-2">
+      <div class="flex gap-4 items-center">
+        <div class="flex flex-col gap-2">
+          <a
+            href={link}
+            target="_blank"
+            class="text-xl font-medium hover:underline"
+          >
+            {title}
+          </a>
+
+          <span>{formatRFC7231(createdAt)} ago</span>
         </div>
       </div>
     </article>

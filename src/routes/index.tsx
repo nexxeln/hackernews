@@ -3,7 +3,7 @@ import { createServerData$ } from "solid-start/server";
 import { For } from "solid-js";
 
 import { prisma } from "~/core/db.server";
-import { Post } from "~/components/Post";
+import { PostCard } from "~/components/Post";
 
 export const routeData = () => {
   // optimize this please
@@ -57,7 +57,7 @@ export default function Home() {
     <div class="flex flex-col gap-8">
       <For each={posts()}>
         {({ id, title, link, upvotes, createdAt }) => (
-          <Post
+          <PostCard
             id={id}
             title={title}
             link={link}
