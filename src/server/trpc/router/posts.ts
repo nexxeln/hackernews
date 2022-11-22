@@ -1,6 +1,25 @@
+import { z } from "zod";
 import { t } from "../utils";
 
 export const postsRouter = t.router({
+  upvote: t.procedure
+    .input(z.object({ id: z.string() }))
+    .mutation(async ({ ctx, input: { id } }) => {
+      await ctx.prisma.post.update({
+        where: { id },
+        data: { upvotes: { increment: 1 } },
+      });
+    }),
+
+  downvote: t.procedure
+    .input(z.object({ id: z.string() }))
+    .mutation(async ({ ctx, input: { id } }) => {
+      await ctx.prisma.post.update({
+        where: { id },
+        data: { upvotes: { decrement: 1 } },
+      });
+    }),
+
   getTrending: t.procedure.query(async ({ ctx }) => {
     const latestGreatestPosts = await ctx.prisma.post.findMany({
       where: {

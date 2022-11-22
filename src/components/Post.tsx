@@ -2,6 +2,7 @@ import clsx from "clsx";
 import { formatDistanceToNow } from "date-fns";
 import type { Component } from "solid-js";
 import { A } from "solid-start";
+import { queryClient, trpc } from "~/utils/trpc";
 
 export const PostCard: Component<{
   id: string;
@@ -10,6 +11,21 @@ export const PostCard: Component<{
   upvotes: number;
   createdAt: string;
 }> = (props) => {
+  const utils = trpc.useContext();
+  const upvote = trpc.posts.upvote.useMutation({
+    onMutate: async () => {
+      utils.posts.getTrending.cancel();
+      const optimisticUpdate = utils.posts.getTrending.getData();
+
+      if (optimisticUpdate) {
+        utils.posts.getTrending.setData(optimisticUpdate);
+      }
+    },
+    onSettled: () => {
+      utils.posts.getTrending.invalidate();
+    },
+  });
+
   return (
     <article class="flex flex-col gap-2">
       <div class="flex gap-4 items-center">
@@ -22,6 +38,7 @@ export const PostCard: Component<{
               stroke-width="1.5"
               stroke="currentColor"
               class={clsx("w-5 h-5 cursor-pointer")}
+              onClick={() => upvote.mutate({ id: props.id })}
             >
               <path
                 stroke-linecap="round"
