@@ -21,7 +21,7 @@ export const routeData = ({}: RouteDataArgs) => {
       const user = await authenticator.isAuthenticated(request);
 
       if (!user) {
-        return redirect("/account");
+        throw redirect("/account");
       }
 
       return user;
@@ -55,7 +55,7 @@ export default function Submit() {
         link: input.data.link,
         description: input.data.description,
         // type error here
-        userId: user().id,
+        userId: user()?.id,
       },
     });
 
