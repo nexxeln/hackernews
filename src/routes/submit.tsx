@@ -55,7 +55,7 @@ export default function Submit() {
         link: input.data.link,
         description: input.data.description,
         // type error here
-        userId: user().id,
+        userId: user()?.id,
       },
     });
 
