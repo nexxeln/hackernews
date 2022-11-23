@@ -2,6 +2,7 @@ import { Show } from "solid-js";
 import { createServerAction$, redirect } from "solid-start/server";
 import { z } from "zod";
 import { withProtected } from "~/layouts/Protected";
+import { authenticator } from "~/server/auth";
 import { prisma } from "~/server/db/client";
 
 const inputSchema = z.object({
@@ -10,30 +11,38 @@ const inputSchema = z.object({
   description: z.string().max(1000).optional(),
 });
 
-export const { routeData, Page } = withProtected((user) => {
-  const [submit, { Form }] = createServerAction$(async (form: FormData, {}) => {
-    const title = form.get("title") as string;
-    const link = form.get("url") as string;
-    const description = form.get("description") as string;
+export const { routeData, Page } = withProtected(() => {
+  const [submit, { Form }] = createServerAction$(
+    async (form: FormData, { request }) => {
+      const title = form.get("title");
+      const link = form.get("url");
+      const description = form.get("description");
 
-    const input = inputSchema.safeParse({ title, link, description });
+      const input = inputSchema.safeParse({ title, link, description });
 
-    if (input.success === false) {
-      console.log(input.error.format());
-      throw new Error(input.error.format()._errors[0]);
+      if (input.success === false) {
+        console.log(input.error.format());
+        throw new Error(input.error.format()._errors[0]);
+      }
+
+      const user = await authenticator.isAuthenticated(request);
+
+      if (!user) {
+        throw redirect("/account");
+      }
+
+      await prisma.post.create({
+        data: {
+          title: input.data.title,
+          link: input.data.link,
+          description: input.data.description,
+          userId: user.id,
+        },
+      });
+
+      throw redirect("/");
     }
-
-    await prisma.post.create({
-      data: {
-        title: input.data.title,
-        link: input.data.link,
-        description: input.data.description,
-        userId: user.id,
-      },
-    });
-
-    throw redirect("/");
-  });
+  );
 
   return (
     <div class="flex flex-col items-center w-full">

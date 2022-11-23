@@ -25,7 +25,7 @@ export const postsRouter = t.router({
       where: {
         createdAt: {
           // check if the post was created in the last 24 hours
-          gte: new Date(Date.now() - 1 * 60 * 60 * 1000),
+          gte: new Date(Date.now() - 24 * 60 * 60 * 1000),
         },
       },
       include: {
