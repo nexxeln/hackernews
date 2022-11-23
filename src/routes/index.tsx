@@ -4,7 +4,6 @@ import { trpc } from "~/utils/trpc";
 
 const Home: ParentComponent = () => {
   const posts = trpc.posts.getTrending.useQuery();
-
   return (
     <>
       <Switch>

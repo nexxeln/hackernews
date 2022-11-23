@@ -10,7 +10,7 @@ const inputSchema = z.object({
   description: z.string().max(1000).optional(),
 });
 
-const Submit = withProtected((props) => {
+export const { routeData, Page } = withProtected((user) => {
   const [submit, { Form }] = createServerAction$(async (form: FormData, {}) => {
     const title = form.get("title") as string;
     const link = form.get("url") as string;
@@ -20,12 +20,7 @@ const Submit = withProtected((props) => {
 
     if (input.success === false) {
       console.log(input.error.format());
-
       throw new Error(input.error.format()._errors[0]);
-    }
-
-    if (!props.user) {
-      return redirect("/account");
     }
 
     await prisma.post.create({
@@ -33,11 +28,11 @@ const Submit = withProtected((props) => {
         title: input.data.title,
         link: input.data.link,
         description: input.data.description,
-        userId: props.user.id,
+        userId: user.id,
       },
     });
 
-    return redirect("/");
+    throw redirect("/");
   });
 
   return (
@@ -91,5 +86,4 @@ const Submit = withProtected((props) => {
   );
 });
 
-export const routeData = Submit.routeData;
-export default Submit.Page;
+export default Page;
