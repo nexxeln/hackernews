@@ -17,12 +17,14 @@ model Post {
     description String?  @db.Text
     link        String   @db.Text
     upvotes     Int      @default(0) @db.SmallInt
-    User        User?    @relation(fields: [userId], references: [id])
+    upvotedBy   User[]   @relation("UpvotedBy")
+    User        User?    @relation("PostedBy", fields: [userId], references: [id])
     userId      String?
 }
 
 model User {
-    id          String @id
-    displayName String
-    posts       Post[]
+    id           String @id
+    displayName  String
+    posts        Post[] @relation("PostedBy")
+    upvotedPosts Post[] @relation("UpvotedBy")
 }

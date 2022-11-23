@@ -1,5 +1,5 @@
 import { Show } from "solid-js";
-import { type RouteDataArgs } from "solid-start";
+import { useRouteData, type RouteDataArgs } from "solid-start";
 import {
   createServerAction$,
   createServerData$,
@@ -16,50 +16,51 @@ const inputSchema = z.object({
 });
 
 export const routeData = ({}: RouteDataArgs) => {
-  return createServerData$(async (_, { request }) => {
-    const user = await authenticator.isAuthenticated(request);
-
-    if (!user) {
-      return redirect("/account");
-    }
-
-    return;
-  });
-};
-
-export default function Submit() {
-  const [submit, { Form }] = createServerAction$(
-    async (form: FormData, { request }) => {
-      const title = form.get("title") as string;
-      const link = form.get("url") as string;
-      const description = form.get("description") as string;
-
-      const input = inputSchema.safeParse({ title, link, description });
-
-      if (input.success === false) {
-        console.log(input.error.format());
-
-        throw new Error(input.error.format()._errors[0]);
-      }
-
+  return {
+    user: createServerData$(async (_, { request }) => {
       const user = await authenticator.isAuthenticated(request);
 
       if (!user) {
         return redirect("/account");
       }
 
-      await prisma.post.create({
-        data: {
-          title: input.data.title,
-          link: input.data.link,
-          description: input.data.description,
-          userId: user.id,
-        },
-      });
+      return user;
+    }),
+  };
+};
 
-      return redirect("/");
+export default function Submit() {
+  const { user } = useRouteData<typeof routeData>();
+
+  const [submit, { Form }] = createServerAction$(async (form: FormData, {}) => {
+    const title = form.get("title") as string;
+    const link = form.get("url") as string;
+    const description = form.get("description") as string;
+
+    const input = inputSchema.safeParse({ title, link, description });
+
+    if (input.success === false) {
+      console.log(input.error.format());
+
+      throw new Error(input.error.format()._errors[0]);
     }
-  );
+
+    if (!user) {
+      return redirect("/account");
+    }
+
+    await prisma.post.create({
+      data: {
+        title: input.data.title,
+        link: input.data.link,
+        description: input.data.description,
+        // type error here
+        userId: user().id,
+      },
+    });
+
+    return redirect("/");
+  });
 
   return (
     <div class="flex flex-col items-center w-full">
