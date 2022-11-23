@@ -1,4 +1,4 @@
-import { Match, Switch, type ParentComponent } from "solid-js";
+import { Match, Switch } from "solid-js";
 import { useRouteData } from "solid-start";
 import { createServerData$ } from "solid-start/server";
 import { authenticator } from "~/server/auth";
