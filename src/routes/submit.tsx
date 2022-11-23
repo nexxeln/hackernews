@@ -1,12 +1,7 @@
 import { Show } from "solid-js";
-import { useRouteData, type RouteDataArgs } from "solid-start";
-import {
-  createServerAction$,
-  createServerData$,
-  redirect,
-} from "solid-start/server";
+import { createServerAction$, redirect } from "solid-start/server";
 import { z } from "zod";
-import { authenticator } from "~/server/auth";
+import { withProtected } from "~/layouts/Protected";
 import { prisma } from "~/server/db/client";
 
 const inputSchema = z.object({
@@ -15,23 +10,7 @@ const inputSchema = z.object({
   description: z.string().max(1000).optional(),
 });
 
-export const routeData = ({}: RouteDataArgs) => {
-  return {
-    user: createServerData$(async (_, { request }) => {
-      const user = await authenticator.isAuthenticated(request);
-
-      if (!user) {
-        throw redirect("/account");
-      }
-
-      return user;
-    }),
-  };
-};
-
-export default function Submit() {
-  const { user } = useRouteData<typeof routeData>();
-
+const Submit = withProtected((props) => {
   const [submit, { Form }] = createServerAction$(async (form: FormData, {}) => {
     const title = form.get("title") as string;
     const link = form.get("url") as string;
@@ -45,7 +24,7 @@ export default function Submit() {
       throw new Error(input.error.format()._errors[0]);
     }
 
-    if (!user) {
+    if (!props.user) {
       return redirect("/account");
     }
 
@@ -54,8 +33,7 @@ export default function Submit() {
         title: input.data.title,
         link: input.data.link,
         description: input.data.description,
-        // type error here
-        userId: user()?.id,
+        userId: props.user.id,
       },
     });
 
@@ -111,4 +89,7 @@ export default function Submit() {
       </Form>
     </div>
   );
-}
+});
+
+export const routeData = Submit.routeData;
+export default Submit.Page;
