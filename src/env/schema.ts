@@ -7,10 +7,7 @@ export const serverSchema = z.object({
   DATABASE_URL: z.string(),
   GITHUB_CLIENT_ID: z.string(),
   GITHUB_CLIENT_SECRET: z.string(),
-  SITE_URL: z.preprocess(
-    (str) => process.env.VERCEL_URL ?? str,
-    process.env.VERCEL ? z.string() : z.string().url()
-  ),
+  SITE_URL: z.string(),
 });
 
 export const clientSchema = z.object({
