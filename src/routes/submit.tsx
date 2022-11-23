@@ -1,6 +1,12 @@
 import { Show } from "solid-js";
-import { createServerAction$, redirect } from "solid-start/server";
+import { type RouteDataArgs } from "solid-start";
+import {
+  createServerAction$,
+  createServerData$,
+  redirect,
+} from "solid-start/server";
 import { z } from "zod";
+import { authenticator } from "~/server/auth";
 import { prisma } from "~/server/db/client";
 
 const inputSchema = z.object({
@@ -9,35 +15,54 @@ const inputSchema = z.object({
   description: z.string().max(1000).optional(),
 });
 
-export default function Submit() {
-  const [submit, { Form }] = createServerAction$(async (form: FormData) => {
-    const title = form.get("title") as string;
-    const link = form.get("url") as string;
-    const description = form.get("description") as string;
+export const routeData = ({}: RouteDataArgs) => {
+  return createServerData$(async (_, { request }) => {
+    const user = await authenticator.isAuthenticated(request);
 
-    const input = inputSchema.safeParse({ title, link, description });
-
-    if (input.success === false) {
-      console.log(input.error.format());
-
-      throw new Error(input.error.format()._errors[0]);
+    if (!user) {
+      return redirect("/account");
     }
 
-    await prisma.post.create({
-      data: {
-        title: input.data.title,
-        link: input.data.link,
-        description: input.data.description,
-      },
-    });
-
-    return redirect("/");
+    return;
   });
+};
+
+export default function Submit() {
+  const [submit, { Form }] = createServerAction$(
+    async (form: FormData, { request }) => {
+      const title = form.get("title") as string;
+      const link = form.get("url") as string;
+      const description = form.get("description") as string;
+
+      const input = inputSchema.safeParse({ title, link, description });
+
+      if (input.success === false) {
+        console.log(input.error.format());
+
+        throw new Error(input.error.format()._errors[0]);
+      }
+
+      const user = await authenticator.isAuthenticated(request);
+
+      if (!user) {
+        return redirect("/account");
+      }
+
+      await prisma.post.create({
+        data: {
+          title: input.data.title,
+          link: input.data.link,
+          description: input.data.description,
+          userId: user.id,
+        },
+      });
+
+      return redirect("/");
+    }
+  );
 
   return (
     <div class="flex flex-col items-center w-full">
-      <p class="text-(center lg) pb-2">Description is optional.</p>
-
       <Form class="flex flex-col gap-2 w-2/3">
         <Show when={submit.error}>
           <span class="text-red-400">{submit.error.message}</span>
@@ -63,7 +88,7 @@ export default function Submit() {
         </div>
 
         <div class="flex flex-col gap-1">
-          <label>Description</label>
+          <label>Description (optional)</label>
           <textarea
             name="description"
             id="description"

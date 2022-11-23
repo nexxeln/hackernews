@@ -17,11 +17,12 @@ const Home: ParentComponent = () => {
         <Match when={posts.isSuccess}>
           <div class="flex flex-col gap-8">
             <For each={posts.data}>
-              {({ id, title, link, upvotes, createdAt }) => (
+              {({ id, title, link, upvotes, createdAt, User }) => (
                 <PostCard
                   id={id}
                   title={title}
                   link={link}
+                  username={User?.displayName}
                   upvotes={upvotes}
                   createdAt={createdAt.toString()}
                 />

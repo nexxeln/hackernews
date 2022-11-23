@@ -28,6 +28,9 @@ export const postsRouter = t.router({
           gte: new Date(Date.now() - 1 * 60 * 60 * 1000),
         },
       },
+      include: {
+        User: { select: { displayName: true } },
+      },
       orderBy: {
         upvotes: "desc",
       },
@@ -41,6 +44,9 @@ export const postsRouter = t.router({
             gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000),
           },
         },
+        include: {
+          User: { select: { displayName: true } },
+        },
         orderBy: {
           upvotes: "desc",
         },
@@ -48,6 +54,9 @@ export const postsRouter = t.router({
 
       if (latestGreatestPosts.length === 0) {
         return await ctx.prisma.post.findMany({
+          include: {
+            User: { select: { displayName: true } },
+          },
           orderBy: {
             upvotes: "desc",
           },
