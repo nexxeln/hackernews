@@ -5,7 +5,6 @@ export const serverSchema = z.object({
     .enum(["development", "production", "test"])
     .default("development"),
   DATABASE_URL: z.string(),
-  SESSION_SECRET: z.string(),
 });
 
 export const clientSchema = z.object({
