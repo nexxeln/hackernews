@@ -11,11 +11,9 @@ const Home: ParentComponent = () => {
         <Match when={posts.isLoading}>
           <p>Loading...</p>
         </Match>
-
         <Match when={posts.isError}>
           <p class="text-red-4">Oh no! Something went wrong!</p>
         </Match>
-
         <Match when={posts.isSuccess}>
           <div class="flex flex-col gap-8">
             <For each={posts.data}>
