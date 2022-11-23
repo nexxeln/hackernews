@@ -1,7 +1,7 @@
 import { Show } from "solid-js";
 import { createServerAction$, redirect } from "solid-start/server";
 import { z } from "zod";
-import { withProtected } from "~/layouts/Protected";
+import { AuthGuard } from "~/components/AuthGuard";
 import { authenticator } from "~/server/auth";
 import { prisma } from "~/server/db/client";
 
@@ -11,7 +11,7 @@ const inputSchema = z.object({
   description: z.string().max(1000).optional(),
 });
 
-export const { routeData, Page } = withProtected(() => {
+export const { routeData, Page } = AuthGuard(() => {
   const [submit, { Form }] = createServerAction$(
     async (form: FormData, { request }) => {
       const title = form.get("title");

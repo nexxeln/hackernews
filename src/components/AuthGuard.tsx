@@ -4,7 +4,7 @@ import { useRouteData } from "solid-start";
 import { createServerData$, redirect } from "solid-start/server";
 import { authenticator } from "~/server/auth";
 
-export const withProtected = (Component: ProtectedRouter) => {
+export const AuthGuard = (Component: ProtectedRouter) => {
   const routeData = () => {
     return createServerData$(async (_, { request }) => {
       const user = await authenticator.isAuthenticated(request);
