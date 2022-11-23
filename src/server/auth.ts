@@ -18,6 +18,7 @@ export const authenticator = new Authenticator<User>(sessionStorage).use(
           id: profile.id,
         },
       });
+
       if (!user) {
         user = await prisma.user.create({
           data: {
