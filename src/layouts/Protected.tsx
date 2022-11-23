@@ -20,8 +20,8 @@ export const withProtected = (Component: ProtectedRouter) => {
       const current = useRouteData<typeof routeData>();
       return (
         <Switch fallback={<h1>Loading</h1>}>
-          <Match when={current()} keyed>
-            {(curr) => <Component {...curr} />}
+          <Match when={current() && !(current() instanceof Response)}>
+            <Component {...(current() as User)} />
           </Match>
         </Switch>
       );
