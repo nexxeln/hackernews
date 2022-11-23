@@ -16,7 +16,9 @@ export const Navbar = () => {
 
       <div class="flex gap-x-4 pt-3 text-(neutral-4 lg) ">
         <NavItem href="/" text="Home" />
+        <NavItem href="/new" text="New" />
         <NavItem href="/submit" text="Submit" />
+        <NavItem href="/account" text="Account" />
       </div>
     </nav>
   );

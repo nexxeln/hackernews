@@ -10,6 +10,7 @@ export const authenticator = new Authenticator<User>(sessionStorage).use(
       clientID: serverEnv.GITHUB_CLIENT_ID,
       clientSecret: serverEnv.GITHUB_CLIENT_SECRET,
       callbackURL: serverEnv.SITE_URL + "/api/auth/github/callback",
+      scope: ["read:user"],
     },
     async ({ profile }) => {
       let user = await prisma.user.findUnique({
