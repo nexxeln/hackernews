@@ -61,7 +61,7 @@ export const PostCard: Component<{
             {props.title}
           </a>
 
-          <div class="text-neutral-4 text-sm flex gap-2">
+          <div class="text-neutral-4 text-xs md:text-sm flex gap-2">
             <span>by {props.username}</span>
             <span>•</span>
             <span>{formatDistanceToNow(new Date(props.createdAt))} ago</span>

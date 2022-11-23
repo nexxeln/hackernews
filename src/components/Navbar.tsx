@@ -15,10 +15,10 @@ export const Navbar = () => {
       <h1 class="text-(center 4xl) font-black pt-6">Hacker News</h1>
 
       <div class="flex gap-x-4 pt-3 text-(neutral-4 lg) ">
-        <NavItem href="/" text="Home" />
-        <NavItem href="/new" text="New" />
-        <NavItem href="/submit" text="Submit" />
-        <NavItem href="/account" text="Account" />
+        <NavItem href="/" text="home" />
+        <NavItem href="/new" text="new" />
+        <NavItem href="/submit" text="submit" />
+        <NavItem href="/account" text="account" />
       </div>
     </nav>
   );
