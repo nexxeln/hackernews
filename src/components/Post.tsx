@@ -25,12 +25,8 @@ export const PostCard: Component<{
         utils.posts.getTrending.setData(optimisticUpdate);
       }
     },
-    onSettled: () => {
-      utils.posts.getTrending.invalidate();
-    },
-    onError: () => {
-      navigate("/account");
-    },
+    onSettled: () => utils.posts.getTrending.invalidate(),
+    onError: () => navigate("/account"),
   });
 
   return (
