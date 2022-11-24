@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { formatDistanceToNow } from "date-fns";
 import type { Component } from "solid-js";
-import { A } from "solid-start";
+import { A, useNavigate } from "solid-start";
 import { trpc } from "~/utils/trpc";
 
 export const PostCard: Component<{
@@ -13,6 +13,8 @@ export const PostCard: Component<{
   upvotes: number;
   createdAt: string;
 }> = (props) => {
+  const navigate = useNavigate();
+
   const utils = trpc.useContext();
   const upvote = trpc.posts.upvote.useMutation({
     onMutate: async () => {
@@ -25,6 +27,9 @@ export const PostCard: Component<{
     },
     onSettled: () => {
       utils.posts.getTrending.invalidate();
+    },
+    onError: () => {
+      navigate("/account");
     },
   });
 

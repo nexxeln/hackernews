@@ -1,13 +1,20 @@
 import { z } from "zod";
-import { t } from "../utils";
+import { protectedProcedure, t } from "../utils";
 
 export const postsRouter = t.router({
-  upvote: t.procedure
+  upvote: protectedProcedure
     .input(z.object({ id: z.string() }))
     .mutation(async ({ ctx, input: { id } }) => {
       await ctx.prisma.post.update({
         where: { id },
-        data: { upvotes: { increment: 1 } },
+        data: {
+          upvotes: { increment: 1 },
+          upvotedBy: {
+            connect: {
+              id: ctx.user.id,
+            },
+          },
+        },
       });
     }),
 
