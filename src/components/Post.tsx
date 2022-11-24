@@ -1,7 +1,6 @@
 import { A } from "solid-start";
 import type { Component } from "solid-js";
 import { formatDistanceToNow } from "date-fns";
-import clsx from "clsx";
 
 export const PostCard: Component<{
   id: string;
