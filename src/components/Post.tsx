@@ -1,5 +1,5 @@
 import { A } from "solid-start";
-import type { Component } from "solid-js";
+import { Component, Show } from "solid-js";
 import { formatDistanceToNow, formatRFC7231 } from "date-fns";
 
 export const PostCard: Component<{
@@ -38,6 +38,7 @@ export const PostCard: Component<{
 export const Post: Component<{
   title: string;
   link: string;
+  description: string | null;
   // fix this
   username: string | undefined;
   createdAt: string;
@@ -52,6 +53,10 @@ export const Post: Component<{
         >
           {props.title}
         </a>
+
+        <Show when={props.description !== null}>
+          <p>{props.description}</p>
+        </Show>
 
         <div class="text-neutral-4 text-xs md:text-sm flex gap-2">
           <span>by {props.username}</span>

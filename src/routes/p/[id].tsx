@@ -2,6 +2,7 @@
 import { Match, Switch } from "solid-js";
 import { useParams } from "solid-start";
 import { CommentForm } from "~/components/Comments/Form";
+import { ListComments } from "~/components/Comments/List";
 import { Post } from "~/components/Post";
 import { trpc } from "~/utils/trpc";
 
@@ -23,11 +24,14 @@ export default function PostPage() {
           <Post
             title={post.data!.title}
             link={post.data!.link}
+            description={post.data!.description}
             username={post.data!.User?.displayName}
             createdAt={post.data!.createdAt.toString()}
           />
 
           <CommentForm id={post.data!.id} />
+
+          <ListComments />
         </div>
       </Match>
     </Switch>
