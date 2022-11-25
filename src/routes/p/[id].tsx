@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Match, Switch } from "solid-js";
 import { useParams } from "solid-start";
+import { CommentSection } from "~/components/Comments";
 import { CommentForm } from "~/components/Comments/Form";
 import { ListComments } from "~/components/Comments/List";
 import { Post } from "~/components/Post";
@@ -29,10 +30,10 @@ export default function PostPage() {
             comments={post.data!.Comment.length}
             createdAt={post.data!.createdAt.toString()}
           />
-
           <CommentForm id={post.data!.id} />
           <div class="pb-10" />
-          <ListComments />
+
+          <CommentSection />
         </div>
       </Match>
     </Switch>
