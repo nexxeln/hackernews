@@ -17,7 +17,10 @@ export const postsRouter = t.router({
     .query(async ({ ctx, input: { id } }) => {
       const post = await ctx.prisma.post.findUnique({
         where: { id },
-        include: { User: { select: { displayName: true } } },
+        include: {
+          User: { select: { displayName: true } },
+          Comment: true,
+        },
       });
 
       return post;
