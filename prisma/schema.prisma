@@ -10,18 +10,34 @@ datasource db {
 }
 
 model Post {
-    id          String   @id @default(cuid())
-    createdAt   DateTime @default(now())
-    updatedAt   DateTime @updatedAt
-    title       String   @db.VarChar(255)
-    description String?  @db.Text
-    link        String   @db.Text
-    User        User?    @relation("PostedBy", fields: [userId], references: [id])
+    id          String    @id @default(cuid())
+    createdAt   DateTime  @default(now())
+    updatedAt   DateTime  @updatedAt
+    title       String    @db.VarChar(255)
+    description String?   @db.Text
+    link        String    @db.Text
+    User        User?     @relation("PostedBy", fields: [userId], references: [id])
     userId      String?
+    Comment     Comment[]
 }
 
 model User {
-    id          String @id
+    id          String    @id
     displayName String
-    posts       Post[] @relation("PostedBy")
+    posts       Post[]    @relation("PostedBy")
+    Comment     Comment[]
+}
+
+model Comment {
+    id        String    @id @default(cuid())
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+    text      String    @db.VarChar(1000)
+    User      User      @relation(fields: [userId], references: [id])
+    userId    String
+    Post      Post      @relation(fields: [postId], references: [id])
+    postId    String
+    children  Comment[] @relation("CommentChildren")
+    parent    Comment?  @relation("CommentChildren", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+    parentId  String?
 }
