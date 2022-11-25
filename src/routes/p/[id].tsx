@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Match, Switch } from "solid-js";
 import { useParams } from "solid-start";
+import { CommentForm } from "~/components/Comments/Form";
 import { Post } from "~/components/Post";
 import { trpc } from "~/utils/trpc";
 
@@ -18,12 +19,16 @@ export default function PostPage() {
         <p class="text-red-4">Oh no! Something went wrong!</p>
       </Match>
       <Match when={post.isSuccess}>
-        <Post
-          title={post.data!.title!}
-          link={post.data!.link!}
-          username={post.data!.User!.displayName!}
-          createdAt={post.data!.createdAt!.toString()}
-        />
+        <div class="w-full">
+          <Post
+            title={post.data!.title}
+            link={post.data!.link}
+            username={post.data!.User?.displayName}
+            createdAt={post.data!.createdAt.toString()}
+          />
+
+          <CommentForm id={post.data!.id} />
+        </div>
       </Match>
     </Switch>
   );

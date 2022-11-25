@@ -2,7 +2,7 @@ import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { protectedProcedure, t } from "../utils";
 
-export const commentRouter = t.router({
+export const commentsRouter = t.router({
   getAll: t.procedure
     .input(z.object({ id: z.string() }))
     .query(async ({ ctx, input: { id } }) => {
