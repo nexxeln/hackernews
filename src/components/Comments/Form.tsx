@@ -6,7 +6,13 @@ export const CommentForm: Component<{ id: string; parentId?: string }> = (
 ) => {
   const [text, setText] = createSignal("");
 
-  const createPost = trpc.comments.create.useMutation();
+  const utils = trpc.useContext();
+  const createPost = trpc.comments.create.useMutation({
+    onSuccess: () => {
+      setText("");
+      utils.comments.getAll.invalidate({ id: props.id });
+    },
+  });
 
   return (
     <div>
@@ -20,8 +26,6 @@ export const CommentForm: Component<{ id: string; parentId?: string }> = (
             text: text(),
             parentId: props.parentId,
           });
-
-          setText("");
         }}
       >
         <input
@@ -37,7 +41,7 @@ export const CommentForm: Component<{ id: string; parentId?: string }> = (
         <button
           type="submit"
           disabled={createPost.isLoading}
-          class="disabled:text-neutral-4"
+          class="disabled:text-neutral-5 flex text-neutral-3"
         >
           <Show fallback="comment" when={props.parentId}>
             reply

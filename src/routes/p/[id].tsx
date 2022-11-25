@@ -26,11 +26,12 @@ export default function PostPage() {
             link={post.data!.link}
             description={post.data!.description}
             username={post.data!.User?.displayName}
+            comments={post.data!.Comment.length}
             createdAt={post.data!.createdAt.toString()}
           />
 
           <CommentForm id={post.data!.id} />
-
+          <div class="pb-10" />
           <ListComments />
         </div>
       </Match>
