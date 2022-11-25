@@ -3,7 +3,6 @@ import { Match, Switch } from "solid-js";
 import { useParams } from "solid-start";
 import { CommentSection } from "~/components/Comments";
 import { CommentForm } from "~/components/Comments/Form";
-import { ListComments } from "~/components/Comments/List";
 import { Post } from "~/components/Post";
 import { trpc } from "~/utils/trpc";
 
