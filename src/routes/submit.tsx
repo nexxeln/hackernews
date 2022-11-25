@@ -53,6 +53,7 @@ export const { routeData, Page } = AuthGuard(() => {
         <div class="flex flex-col gap-1">
           <label>Title</label>
           <input
+            required
             type="text"
             name="title"
             id="title"
@@ -63,6 +64,7 @@ export const { routeData, Page } = AuthGuard(() => {
         <div class="flex flex-col gap-1">
           <label>URL</label>
           <input
+            required
             type="text"
             name="url"
             id="url"
