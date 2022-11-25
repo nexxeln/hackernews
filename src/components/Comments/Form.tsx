@@ -1,5 +1,6 @@
-import { createSignal, Show, type Component } from "solid-js";
 import { useNavigate } from "solid-start";
+import { createSignal, Show, type Component } from "solid-js";
+
 import { trpc } from "~/utils/trpc";
 
 export const CommentForm: Component<{ id: string; parentId?: string }> = (

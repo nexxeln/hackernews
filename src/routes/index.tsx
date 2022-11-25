@@ -1,4 +1,5 @@
 import { For, Match, Switch, type ParentComponent } from "solid-js";
+
 import { PostCard } from "~/components/Post";
 import { trpc } from "~/utils/trpc";
 

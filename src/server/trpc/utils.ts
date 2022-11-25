@@ -1,6 +1,7 @@
 import { initTRPC, TRPCError } from "@trpc/server";
-import { authenticator } from "../auth";
+
 import type { IContext } from "./context";
+import { authenticator } from "../auth";
 
 export const t = initTRPC.context<IContext>().create();
 

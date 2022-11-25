@@ -1,5 +1,6 @@
 import { createCookieSessionStorage } from "solid-start";
 import { createSolidAuthClient } from "solidjs-auth";
+
 import { clientEnv } from "~/env/client";
 
 const getBaseUrl = () => {

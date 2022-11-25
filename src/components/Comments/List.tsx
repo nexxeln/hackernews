@@ -1,6 +1,7 @@
-import { formatDistanceToNow } from "date-fns";
-import { createSignal, For, Show, type Component } from "solid-js";
 import { useParams } from "solid-start";
+import { createSignal, For, Show, type Component } from "solid-js";
+import { formatDistanceToNow } from "date-fns";
+
 import type { CommentWithChildren } from "~/server/trpc/router/_app";
 import { CommentForm } from "./Form";
 

@@ -1,5 +1,6 @@
-import { serverSchema } from "./schema";
 import type { ZodFormattedError } from "zod";
+
+import { serverSchema } from "./schema";
 
 export const formatErrors = (
   errors: ZodFormattedError<Map<string, string>, string>

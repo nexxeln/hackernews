@@ -1,7 +1,8 @@
-import { type User } from "@prisma/client";
-import { Match, Switch, type Component } from "solid-js";
 import { useRouteData } from "solid-start";
 import { createServerData$, redirect } from "solid-start/server";
+import { Match, Switch, type Component } from "solid-js";
+import { type User } from "@prisma/client";
+
 import { authenticator } from "~/server/auth";
 
 export const AuthGuard = (Component: ProtectedRouter) => {

@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { Match, Switch } from "solid-js";
 import { useParams } from "solid-start";
+import { Match, Switch } from "solid-js";
+
 import { CommentSection } from "~/components/Comments";
 import { CommentForm } from "~/components/Comments/Form";
 import { Post } from "~/components/Post";

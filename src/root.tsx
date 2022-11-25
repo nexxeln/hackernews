@@ -1,5 +1,4 @@
 // @refresh reload
-import { Suspense } from "solid-js";
 import {
   Body,
   ErrorBoundary,
@@ -11,6 +10,7 @@ import {
   Scripts,
   Title,
 } from "solid-start";
+import { Suspense } from "solid-js";
 import "uno.css";
 import "@unocss/reset/tailwind.css";
 

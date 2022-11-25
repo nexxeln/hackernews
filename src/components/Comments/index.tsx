@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { Show } from "solid-js";
 import { useParams } from "solid-start";
+import { Show } from "solid-js";
+
 import { formatComments } from "~/utils/format-comments";
 import { trpc } from "~/utils/trpc";
 import { ListComments } from "./List";

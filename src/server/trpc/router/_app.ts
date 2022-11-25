@@ -1,4 +1,5 @@
 import type { inferRouterOutputs } from "@trpc/server";
+
 import { t } from "../utils";
 import { commentsRouter } from "./comments";
 import { postsRouter } from "./posts";

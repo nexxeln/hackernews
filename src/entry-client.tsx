@@ -1,4 +1,5 @@
 import { mount, StartClient } from "solid-start/entry-client";
+
 import { client, queryClient, trpc } from "./utils/trpc";
 
 mount(
