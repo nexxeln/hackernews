@@ -19,6 +19,7 @@ export default function PostPage() {
       <Match when={post.isError}>
         <p class="text-red-4">Oh no! Something went wrong!</p>
       </Match>
+
       <Match when={post.isSuccess}>
         <div class="w-full">
           <Post
