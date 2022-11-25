@@ -1,9 +1,11 @@
 import { createSignal, Show, type Component } from "solid-js";
+import { useNavigate } from "solid-start";
 import { trpc } from "~/utils/trpc";
 
 export const CommentForm: Component<{ id: string; parentId?: string }> = (
   props
 ) => {
+  const navigate = useNavigate();
   const [text, setText] = createSignal("");
 
   const utils = trpc.useContext();
@@ -11,6 +13,9 @@ export const CommentForm: Component<{ id: string; parentId?: string }> = (
     onSuccess: () => {
       setText("");
       utils.comments.getAll.invalidate({ id: props.id });
+    },
+    onError: (error) => {
+      error.data?.code === "UNAUTHORIZED" && navigate("/account");
     },
   });
 
