@@ -13,6 +13,7 @@ This is mostly a learning project to try out SolidStart and tRPC together.
 - [ ] Pagination
 - [ ] Optimize queries
 - [ ] Search
+- [ ] Meta tags
 - [ ] Deploy on the edge
 
 ## Credits
