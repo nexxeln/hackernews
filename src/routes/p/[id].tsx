@@ -3,7 +3,7 @@ import { useParams } from "solid-start";
 import { Match, Switch } from "solid-js";
 
 // import { CommentSection } from "~/components/Comments";
-// import { CommentForm } from "~/components/Comments/Form";
+import { CommentForm } from "~/components/Comments/Form";
 import { Post } from "~/components/Post";
 import { trpc } from "~/utils/trpc";
 
@@ -32,7 +32,8 @@ export default function PostPage() {
               comments={post.Comment.length}
               createdAt={post.createdAt.toString()}
             />
-            {/* <CommentForm id={post.id} />
+            <CommentForm id={post.id} />
+            {/* 
             <div class="pb-10" />
             <CommentSection /> */}
           </div>
