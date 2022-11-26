@@ -23,7 +23,7 @@ export default function PostPage() {
 
       <Match when={post.data} keyed>
         {(post) => (
-          <div class="w-full">
+          <div class="w-full ">
             <Post
               title={post.title}
               link={post.link}
