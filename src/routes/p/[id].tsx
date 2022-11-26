@@ -21,21 +21,22 @@ export default function PostPage() {
         <p class="text-red-4">Oh no! Something went wrong!</p>
       </Match>
 
-      <Match when={post.isSuccess}>
-        <div class="w-full">
-          <Post
-            title={post.data!.title}
-            link={post.data!.link}
-            description={post.data!.description}
-            username={post.data!.User?.displayName}
-            comments={post.data!.Comment.length}
-            createdAt={post.data!.createdAt.toString()}
-          />
-          <CommentForm id={post.data!.id} />
-          <div class="pb-10" />
-
-          <CommentSection />
-        </div>
+      <Match when={post.data} keyed>
+        {(post) => (
+          <div class="w-full">
+            <Post
+              title={post.title}
+              link={post.link}
+              description={post.description}
+              username={post.User?.displayName}
+              comments={post.Comment.length}
+              createdAt={post.createdAt.toString()}
+            />
+            <CommentForm id={post.id} />
+            <div class="pb-10" />
+            <CommentSection />
+          </div>
+        )}
       </Match>
     </Switch>
   );

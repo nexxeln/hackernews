@@ -23,3 +23,5 @@ gitignore
 Thumbs.db
 
 .env
+db.sqlite
+beSchema.txt
