@@ -2,8 +2,8 @@
 import { useParams } from "solid-start";
 import { Match, Switch } from "solid-js";
 
-import { CommentSection } from "~/components/Comments";
-import { CommentForm } from "~/components/Comments/Form";
+// import { CommentSection } from "~/components/Comments";
+// import { CommentForm } from "~/components/Comments/Form";
 import { Post } from "~/components/Post";
 import { trpc } from "~/utils/trpc";
 
@@ -23,17 +23,18 @@ export default function PostPage() {
 
       <Match when={post.data} keyed>
         {(post) => (
-          <div class="w-full ">
+          <div class="w-full">
             <Post
               title={post.title}
               link={post.link}
               description={post.description}
               username={post.User?.displayName}
+              comments={post.Comment.length}
               createdAt={post.createdAt.toString()}
             />
-            <CommentForm id={post.id} />
+            {/* <CommentForm id={post.id} />
             <div class="pb-10" />
-            <CommentSection />
+            <CommentSection /> */}
           </div>
         )}
       </Match>
