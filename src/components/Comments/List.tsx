@@ -5,7 +5,9 @@ import { formatDistanceToNow } from "date-fns";
 import type { CommentWithChildren } from "~/server/trpc/router/_app";
 import { CommentForm } from "./Form";
 
-const CommentCard: Component<{ comment: CommentWithChildren }> = (props) => {
+export const CommentCard: Component<{ comment: CommentWithChildren }> = (
+  props
+) => {
   const { id } = useParams();
   const [replying, setReplying] = createSignal(false);
 

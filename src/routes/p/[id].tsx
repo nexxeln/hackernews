@@ -2,7 +2,7 @@
 import { useParams } from "solid-start";
 import { Match, Switch } from "solid-js";
 
-// import { CommentSection } from "~/components/Comments";
+import { CommentSection } from "~/components/Comments";
 import { CommentForm } from "~/components/Comments/Form";
 import { Post } from "~/components/Post";
 import { trpc } from "~/utils/trpc";
@@ -33,9 +33,9 @@ export default function PostPage() {
               createdAt={post.createdAt.toString()}
             />
             <CommentForm id={post.id} />
-            {/* 
             <div class="pb-10" />
-            <CommentSection /> */}
+
+            <CommentSection id={id} />
           </div>
         )}
       </Match>

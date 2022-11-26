@@ -1,21 +1,23 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { useParams } from "solid-start";
-import { Show } from "solid-js";
+import { type Component, Switch, Match } from "solid-js";
 
 import { formatComments } from "~/utils/format-comments";
 import { trpc } from "~/utils/trpc";
 import { ListComments } from "./List";
 
-export const CommentSection = () => {
-  const { id } = useParams();
-  const comments = trpc.comments.getAll.useQuery(() => ({ id }));
+export const CommentSection: Component<{ id: string }> = (props) => {
+  const comments = trpc.comments.getAll.useQuery(() => ({ id: props.id }));
 
   return (
     <div>
-      <Show when={comments.data}>
-        {/* @ts-ignore */}
-        <ListComments comments={formatComments(comments.data || [])} />
-      </Show>
+      <Switch fallback={<p>Loading comments...</p>}>
+        <Match when={comments.data} keyed>
+          {(comments) => (
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            <ListComments comments={formatComments(comments as any)} />
+          )}
+        </Match>
+      </Switch>
     </div>
   );
 };
