@@ -12,10 +12,9 @@ const getBaseUrl = () => {
 export const sessionStorage = createCookieSessionStorage({
   cookie: {
     name: "_session",
-    sameSite: "lax",
-    path: "/",
     secrets: [clientEnv.VITE_SESSION_SECRET],
     secure: true,
+    maxAge: 60 * 60 * 24 * 30,
   },
 });
 
