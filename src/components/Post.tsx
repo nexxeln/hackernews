@@ -41,7 +41,6 @@ export const Post: Component<{
   description: string | null;
   // fix this
   username: string | undefined;
-  comments: number;
   createdAt: string;
 }> = (props) => {
   return (
@@ -63,8 +62,8 @@ export const Post: Component<{
           <span>by {props.username}</span>
           <span>•</span>
           <span>{formatRFC7231(new Date(props.createdAt))}</span>
-          <span>•</span>
-          <span>{props.comments} comments</span>
+          {/* <span>•</span>
+          <span>{props.comments} comments</span> */}
         </div>
       </div>
     </article>

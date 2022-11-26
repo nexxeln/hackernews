@@ -29,7 +29,6 @@ export default function PostPage() {
               link={post.link}
               description={post.description}
               username={post.User?.displayName}
-              comments={post.Comment.length}
               createdAt={post.createdAt.toString()}
             />
             <CommentForm id={post.id} />
