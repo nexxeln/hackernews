@@ -34,7 +34,6 @@ export default function PostPage() {
             />
             <CommentForm id={post.id} />
             <div class="pb-10" />
-
             <CommentSection id={id} />
           </div>
         )}
