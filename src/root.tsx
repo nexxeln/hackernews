@@ -26,9 +26,9 @@ export default function Root() {
         <Meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <Body>
+        <Navbar />
         <Suspense>
           <ErrorBoundary>
-            <Navbar />
             <main class="flex flex-col items-start mx-4 pb-6 md:mx-auto md:w-1/2">
               <Routes>
                 <FileRoutes />
