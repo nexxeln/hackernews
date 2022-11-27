@@ -10,7 +10,10 @@ export const CommentSection: Component<{ id: string }> = (props) => {
 
   return (
     <div>
-      <Switch fallback={<p>Loading comments...</p>}>
+      <Switch fallback={<p>Something went wrong</p>}>
+        <Match when={comments.isLoading}>
+          <p>Loading comments...</p>
+        </Match>
         <Match when={comments.data} keyed>
           {(comments) => (
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
