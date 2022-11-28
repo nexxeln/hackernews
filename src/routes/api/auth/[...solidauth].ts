@@ -1,4 +1,4 @@
-import { createSolidAuthHandler } from "solidjs-auth";
+import { createSolidAuthHandler } from "solid-auth";
 import { type User } from "@prisma/client";
 
 import { authenticator } from "~/server/auth";

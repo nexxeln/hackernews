@@ -34,11 +34,11 @@
     "clsx": "^1.2.1",
     "date-fns": "^2.29.3",
     "dotenv": "^16.0.3",
+    "solid-auth": "^0.0.1",
     "solid-js": "^1.5.7",
     "solid-start": "^0.2.1",
     "solid-start-trpc": "^0.0.13",
     "solid-trpc": "0.0.11-rc.2",
-    "solidjs-auth": "^0.0.8",
     "undici": "5.11.0",
     "zod": "^3.19.1"
   },

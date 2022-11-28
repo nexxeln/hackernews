@@ -1,4 +1,4 @@
-import { Authenticator, GitHubStrategy } from "solidjs-auth";
+import { Authenticator, GitHubStrategy } from "solid-auth";
 import { type User } from "@prisma/client";
 
 import { serverEnv } from "~/env/server";
